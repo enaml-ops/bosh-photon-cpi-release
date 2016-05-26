@@ -1,0 +1,21 @@
+---
+platform: linux
+image: docker:///virtmerlin/deploy-worker
+inputs:
+  - name: cpi-release
+  - name: cpi-release-candidate
+  - name: stemcell
+  - name: bosh-init
+  - name: bosh-release
+params:
+  PHOTON_CLI_URL: {{photon-controller-cli-url}}
+  PHOTON_TARGET: {{photon-controller-target}}
+  PHOTON_TENANT: {{photon-controller-tenant}}
+  PHOTON_PROJECT: {{photon-controller-project}}
+  PHOTON_NETWORK: {{pc-bosh-network}}
+  NETWORK_RANGE: {{pc-bosh-network-subnet}}
+  NETWORK_GATEWAY: {{pc-bosh-network-gateway}}
+  NETWORK_DNS: {{pc-bosh-network-gateway}}
+  DIRECTOR_IP: {{pc-bosh-network-ip}}
+run:
+  path: cpi-release/ci/tasks/generate-microbosh-manifest.sh
